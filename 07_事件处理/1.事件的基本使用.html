@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>事件基本使用</title>
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+
+	<body>
+		<div id="root">
+			<h1>欢迎您，{{name}}</h1>
+			<button v-on:click="showInfo">点我提示信息（传参）</button>
+			<button v-on:click="showEventInfo">点我提示信息(箭头函数)</button>
+			<button @click="showInfoSimple($event,66)">点我提示信息2(传参)</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.config.productionTip = false;
+		const vm = new Vue({
+			el: '#root',
+			data: {
+				name: 'onlyWjt'
+			},
+			methods: {
+				showInfo(event) {
+					console.log(event.target.innerText);
+					console.log(this); //这就是vue实例
+					// alert('同学，你好');
+				},
+				showEventInfo: (event) => {
+					console.log('箭头函数' + this); //这里面的this。是window对象
+				},
+				showInfoSimple(event, number) {
+					//也可以写到data里面，但是会被数据代理，如果呗数据代理的话，vue会很累
+					console.log(event.target.innerText);
+					console.log(this); //这就是vue实例
+					console.log(number);
+					alert('同学，你好simple');
+				}
+			}
+		});
+	</script>
+</html>

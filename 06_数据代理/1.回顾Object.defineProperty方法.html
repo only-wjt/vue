@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<script type="text/javascript"></script>
+		<title>回顾Object.defineProperty方法</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			let person = {
+				name: '王天娇',
+				sex: '男',
+			};
+			var number = 18;
+			Object.defineProperty(person, 'age', {
+				//age是不参与遍历，不参与枚举的
+				//value: 18,
+				// enumerable: true,//控制属性是否可以枚举，默认值是FALSE，但是此时不能用console里面的代码修改
+				// writable: true,//控制属性是否可以呗修改
+				// configurable: true,//控制属性是否可以被删除
+				get: function () {
+					console.log('再次读取');
+					return number; //这样改动number之后，就可以访问一次number的值
+				},
+				set(value) {
+					//当有人修改时，set函数就会呗调用，且会受到修改的具体值
+					console.log('有人修改了值');
+					number = value;
+				},
+			});
+			console.log(Object.keys(person));
+			for (const key in person) {
+				console.log('@', '@', key);
+			}
+			console.log(person);
+		</script>
+	</body>
+</html>
