@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>姓名案例_计算属性实现</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 
+			计算属性：
+					1.定义：要用的属性不存在，要通过已有属性计算得来。
+					2.原理：底层借助了Objcet.defineproperty方法提供的getter和setter。
+					3.get函数什么时候执行？
+								(1).初次读取时会执行一次。
+								(2).当依赖的数据发生改变时会被再次调用。
+					4.优势：与methods实现相比，内部有缓存机制（复用），效率更高，调试方便。
+					5.备注：
+							1.计算属性最终会出现在vm上，直接读取使用即可。
+							2.如果计算属性要被修改，那必须写set函数去响应修改，且set中要引起计算时依赖的数据发生改变。
+							v-model。是双向数据绑定
+		 -->
+		<!-- 准备好一个容器-->
+		<div id="root">
+			姓：<input type="text" v-model="firstName" /> <br /><br />
+			名：<input type="text" v-model="lastName" /> <br /><br />
+			测试：<input type="text" v-model:value="x()" /> <br /><br />
+			<!-- 全名：<span>{{fullName}}</span> <br /><br />
+			全名：<span>{{fullName}}</span> <br /><br />
+			全名：<span>{{fullName}}</span> <br /><br />
+			全名：<span>{{fullName}}</span> 
+			-->
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+		const vm = new Vue({
+			el: '#root',
+			data: {
+				firstName: 'only',
+				lastName: 'Wjt'
+			},
+			methods: {
+				x() {
+					return this.firstName + this.lastName;
+				}
+			},
+			computed: {
+				fullName: {
+					//当有人读取funName，get就会调用，且返回值就作为funllName  如果有多个，则想缓存里面获取，如果数据发生变化，所依赖的数据则再次读取
+					//相对于methods，methods则调用多次，computed有缓存，部分情况只调用一次，如果所依赖的值变化，才会再次调用
+					get() {
+						console.log('被调用了');
+						return this.firstName + '-' + this.lastName;
+					},
+					//当fullName被修改是，会调用
+					set(value) {
+						console.log('@', value);
+						this.firstName = value.split('-')[0];
+						this.lastName = value.split('-')[1];
+					}
+				}
+			}
+		});
+	</script>
+</html>
