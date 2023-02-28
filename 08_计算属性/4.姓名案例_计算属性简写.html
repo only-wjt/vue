@@ -21,26 +21,19 @@
 		const vm = new Vue({
 			el: '#root',
 			data: {
-				firstName: '张',
-				lastName: '三'
+				firstName: 'onlyWjt',
+				lastName: 'Wjt'
 			},
+
+			// computed: {
+			// 	fullName: {
+			// 		get() {
+			// 			return fistName + '-' + lastName;
+			// 		}
+			// 	}
+			// }
 			computed: {
-				//完整写法
-				/* fullName:{
-					get(){
-						console.log('get被调用了')
-						return this.firstName + '-' + this.lastName
-					},
-					set(value){
-						console.log('set',value)
-						const arr = value.split('-')
-						this.firstName = arr[0]
-						this.lastName = arr[1]
-					}
-				} */
-				//简写
 				fullName() {
-					console.log('get被调用了');
 					return this.firstName + '-' + this.lastName;
 				}
 			}
