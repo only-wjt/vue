@@ -8,6 +8,7 @@
 		<script type="text/javascript">
 			let data = {
 				name: '尚硅谷',
+<<<<<<< HEAD
 				address: '北京',
 				student: {
 					name: 'tom',
@@ -41,6 +42,29 @@
 						},
 						set(val) {
 							console.log('k被修改了，先去解析模板，生成虚拟dom...开始处理了');
+=======
+				address: '北京'
+			};
+			//创建一个监视的实例对象，用于监视data中属性的变化
+			const obs = new Observer(data);
+			console.log(obs);
+
+			//准备一个vm实例对象
+			let vm = {};
+			vm._data = data = obs;
+
+			function Observer(obj) {
+				//汇总对象中所有的属性形成一个数组
+				const keys = Object.keys(obj);
+				//遍历
+				keys.forEach((k) => {
+					Object.defineProperty(this, k, {
+						get() {
+							return obj[k];
+						},
+						set(val) {
+							console.log(`${k}被改了，我要去解析模板，生成虚拟DOM.....我要开始忙了`);
+>>>>>>> 112080d75b0d9ac90348da488d94274720dfb4c9
 							obj[k] = val;
 						}
 					});
