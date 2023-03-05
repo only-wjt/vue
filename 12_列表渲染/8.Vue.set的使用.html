@@ -12,11 +12,7 @@
 			<h1>学校信息</h1>
 			<h2>学校名称：{{school.name}}</h2>
 			<h2>学校地址：{{school.address}}</h2>
-<<<<<<< HEAD
 			<h2>校长是：{{school.leaderName}}</h2>
-=======
-			<h2>校长是：{{school.leader}}</h2>
->>>>>>> 112080d75b0d9ac90348da488d94274720dfb4c9
 			<hr />
 			<h1>学生信息</h1>
 			<button @click="addSex">点击添加学生信息</button>
@@ -33,9 +29,6 @@
 		</div>
 	</body>
 
-
-
-
 	<script type="text/javascript">
 		Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
 
@@ -44,40 +37,22 @@
 			data: {
 				school: {
 					name: '尚硅谷',
-<<<<<<< HEAD
 					address: '北京'
-=======
-					address: '北京',
->>>>>>> 112080d75b0d9ac90348da488d94274720dfb4c9
 				},
 				student: {
 					name: 'tom',
 					age: {
 						rAge: 40,
-<<<<<<< HEAD
 						sAge: 29
 					},
 					friends: [
 						{ name: 'jerry', age: 35 },
 						{ name: 'tony', age: 36 }
-=======
-						sAge: 29,
-					},
-					friends: [{
-							name: 'jerry',
-							age: 35
-						},
-						{
-							name: 'tony',
-							age: 36
-						}
->>>>>>> 112080d75b0d9ac90348da488d94274720dfb4c9
 					]
 				}
 			},
 			methods: {
 				addSex() {
-<<<<<<< HEAD
 					// Vue.set(this.student, 'sex', '男');
 					// Vue.set(this.student,'sex','男')
 					this.$set(this.student, 'sex', '男');
@@ -86,27 +61,3 @@
 		});
 	</script>
 </html>
-=======
-					// Vue.set(this.student,'sex','男')
-					this.$set(this.student, 'sex', '男')
-				}
-			}
-		})
-		new Vue({
-			el:"#root",
-			data:{
-				
-			},
-			methods:{
-				
-			},
-			computed: {
-				name() {
-					return this.data 
-				}
-			},
-			
-		})
-	</script>
-</html>
->>>>>>> 112080d75b0d9ac90348da488d94274720dfb4c9
