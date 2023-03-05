@@ -13,7 +13,7 @@
 			<h2>学校名称：{{school.name}}</h2>
 			<h2>学校地址：{{school.address}}</h2>
 			<h2>校长是：{{school.leader}}</h2>
-			<hr/>
+			<hr />
 			<h1>学生信息</h1>
 			<button @click="addSex">添加一个性别属性，默认值是男</button>
 			<h2>姓名：{{student.name}}</h2>
@@ -21,48 +21,47 @@
 			<h2>年龄：真实{{student.age.rAge}}，对外{{student.age.sAge}}</h2>
 			<h2>爱好</h2>
 			<ul>
-				<li v-for="(h,index) in student.hobby" :key="index">
-					{{h}}
-				</li>
+				<li v-for="p,index in student.hobby" :key="index">{{p}}</li>
 			</ul>
 			<h2>朋友们</h2>
 			<ul>
-				<li v-for="(f,index) in student.friends" :key="index">
-					{{f.name}}--{{f.age}}
-				</li>
+				<li v-for="(f,index) in student.friends" :key="index">{{f.name}}--{{f.age}}</li>
 			</ul>
 		</div>
 	</body>
 
 	<script type="text/javascript">
-		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+		Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
 
 		const vm = new Vue({
-			el:'#root',
-			data:{
-				school:{
-					name:'尚硅谷',
-					address:'北京',
+			el: '#root',
+			data: {
+				school: {
+					name: '尚硅谷',
+					address: '北京'
 				},
-				student:{
-					name:'tom',
-					age:{
-						rAge:40,
-						sAge:29,
+				student: {
+					name: 'tom',
+					age: {
+						rAge: 40,
+						sAge: 29
 					},
-					hobby:['抽烟','喝酒','烫头'],
-					friends:[
-						{name:'jerry',age:35},
-						{name:'tony',age:36}
+					hobby: ['抽烟', '喝酒', '烫头'],
+					friends: [
+						{ name: 'jerry', age: 35 },
+						{ name: 'tony', age: 36 }
 					]
 				}
 			},
 			methods: {
-				addSex(){
+				addSex() {
 					// Vue.set(this.student,'sex','男')
-					this.$set(this.student,'sex','男')
+					this.$set(this.student, 'sex', '男');
+					//vue可以监控 数组操作的各种方法，shift,splice,push，sort,reverse等
+					//vue对Array中的数组方法包装，来进行监控
+					this.$set(this.student.hobby, 2, '测试');
 				}
 			}
-		})
+		});
 	</script>
 </html>

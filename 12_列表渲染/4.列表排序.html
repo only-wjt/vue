@@ -37,17 +37,22 @@
 					]
 				},
 				computed:{
-					filPerons(){
-						const arr = this.persons.filter((p)=>{
-							return p.name.indexOf(this.keyWord) !== -1
-						})
-						//判断一下是否需要排序
-						if(this.sortType){
-							arr.sort((p1,p2)=>{
-								return this.sortType === 1 ? p2.age-p1.age : p1.age-p2.age
-							})
+					filPerons:{
+						get(){
+							const arr = this.persons.filter((p)=>{
+								console.log(p);
+								return p.name.indexOf(this.keyWord)>-1;
+							});
+							if(this.sortType){//排序
+								arr.sort((a,b)=>{
+									return this.sortType === 1 ? a.age-b.age :b.age-a.age;
+								});
+							}
+							return arr;
+						},
+						set(value){
+							
 						}
-						return arr
 					}
 				}
 			}) 
