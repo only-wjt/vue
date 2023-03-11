@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>分析生命周期</title>
+		<!-- 引入Vue -->
+		<script type="text/javascript" src="../js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 准备好一个容器-->
+		<div id="root" :x="n">
+			<h2 v-text="n"></h2>
+			<h2>当前的n值是:{{n}}</h2>
+			<button @click="add">点我n+1</button>
+			<button @click="bye">点我销毁vm</button>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+
+		new Vue({
+			el: '#root', //整个root的元素都是模板
+			// template: `<div><h2>当前的n值是:{{n}}</h2><button @click="add">点我n+1</button></div>`,
+
+			data: {
+				n: 1
+			},
+			watch: {
+				n() {
+					console.log('watch', this.n);
+				}
+			},
+
+			methods: {
+				add() {
+					console.log('add');
+					this.n++;
+				},
+				bye() {
+					console.log('bye');
+					this.$destroy();
+				}
+			},
+			beforeCreate() {
+				console.log('beforeCreate');
+				// console.log(this);
+				// debugger;
+			},
+			created() {
+				//数据检测和数据代理创建后，可以检测data和methods等
+				console.log('created');
+				// console.log(this);
+			},
+			//然后开始解析模板，生成虚拟dom（内存中），页面还不能显示解析好的内容
+			beforeMount() {
+				//虚拟dom生成完毕，还未生成真实dom之前
+				console.log('beforeMount');
+				console.log(this);
+				// debugger;
+			},
+			mounted() {
+				//这是经过vue解析之后的dom元素之后，这时候操作dom是有效的
+				//开启定时器，发送网络请求，订阅消息，绑定自定义事件
+				console.log('mounted');
+				console.log(this);
+				console.log(this.$el);
+				// debugger;
+			},
+			beforeUpdate() {
+				//数据还未更新
+				console.log('@', 'beforeUpdate');
+				console.log(this.n);
+				// debugger;
+			},
+			updated() {
+				//数据已经更新过
+				console.log('@', 'updated');
+				console.log(this.n);
+				// debugger;
+			},
+			beforeDestroy() {
+				//销毁之前此时，还未销毁，data，method，指令都可以使用
+				console.log('beforeDestroy');
+				console.log(this);
+				this.add(); //此时对数据的所有操作，都不会在触发了
+			},
+			destroyed() {
+				//销毁里面的this还是vm实例，此时时间的回调还可以使用，移除事件监听器指的是移除了自定义事件，但是绑定在dom里面的事件还是在的
+				console.log('destroyed');
+				console.log(this);
+			}
+		});
+	</script>
+</html>
