@@ -18,60 +18,51 @@
 	</body>
 
 	<script type="text/javascript">
-		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
-		Vue.prototype.x = 99
+		Vue.config.productionTip = false; //阻止 vue 在启动时生成生产提示。
+		Vue.prototype.x = 99;
 
 		//定义school组件
 		const school = Vue.extend({
-			name:'school',
-			template:`
-				<div>
-					<h2>学校名称：{{name}}</h2>	
-					<h2>学校地址：{{address}}</h2>	
+			name: 'school',
+			template: `
+				<div>     
+					<h2>学校名称：{{name}}</h2>
+					<h2>学校地址：{{address}}</h2>
 					<button @click="showX">点我输出x</button>
 				</div>
 			`,
-			data(){
+			data() {
 				return {
-					name:'尚硅谷',
-					address:'北京'
-				}
+					name: '尚硅谷',
+					address: '北京'
+				};
 			},
 			methods: {
-				showX(){
-					console.log(this.x)
+				showX() {
+					console.log('@', this.x);
 				}
-			},
-		})
-
+			}
+		});
+		school.prototype.x; //这样也可以输出，因为vc的原型属性就是vue的原型，然后最后找object的原型属性
 		//创建一个vm
 		const vm = new Vue({
-			el:'#root',
-			data:{
-				msg:'你好'
+			el: '#root',
+			data: {
+				msg: '你好'
 			},
-			components:{school}
-		})
-
-		
-		//定义一个构造函数
-		/* function Demo(){
-			this.a = 1
-			this.b = 2
-		}
-		//创建一个Demo的实例对象
-		const d = new Demo()
-
-		console.log(Demo.prototype) //显示原型属性
-
-		console.log(d.__proto__) //隐式原型属性
-
-		console.log(Demo.prototype === d.__proto__)
-
-		//程序员通过显示原型属性操作原型对象，追加一个x属性，值为99
-		Demo.prototype.x = 99
-
-		console.log('@',d) */
-
+			components: { school }
+		});
+		//实例的隐式属性对象，指向的是创建自己的原型对象，然后只想Object的对象
+		// function Demo() {
+		// 	this.a = 1;
+		// 	this.b = 2;
+		// }
+		// const d = new Demo();
+		// console.log(Demo.prototype); //显示原型属性
+		// console.log(d._proto_); //隐式原型属性
+		// Demo.prototype.x = 99; //通过显式原型属性操作原型对象，追加一个x属性，值为99
+		// console.log('@', d._proto_.x);
+		// function Person() {}
+		// function Dog() {}
 	</script>
 </html>

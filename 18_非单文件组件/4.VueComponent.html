@@ -32,59 +32,56 @@
 	</body>
 
 	<script type="text/javascript">
-		Vue.config.productionTip = false
-		
+		Vue.config.productionTip = false;
+
 		//定义school组件
+		//VueComponent，这块是vue帮我们创建的
+		//特别注意：每次调用Vue.extend，返回的都是一个全新的VueComponent！！！！
 		const school = Vue.extend({
-			name:'school',
-			template:`
+			name: 'school',
+			template: `
 				<div>
-					<h2>学校名称：{{name}}</h2>	
-					<h2>学校地址：{{address}}</h2>	
+					<h2>学校名称：{{name}}</h2>
+					<h2>学校地址：{{address}}</h2>
 					<button @click="showName">点我提示学校名</button>
 				</div>
 			`,
-			data(){
+
+			data() {
 				return {
-					name:'尚硅谷',
-					address:'北京'
-				}
+					name: '尚硅谷',
+					address: '北京'
+				};
 			},
 			methods: {
-				showName(){
-					console.log('showName',this)
+				showName() {
+					console.log('showName', this); //此时this是组件实例对象
 				}
-			},
-		})
-
-		const test = Vue.extend({
-			template:`<span>atguigu</span>`
-		})
-
-		//定义hello组件
+			}
+		});
+		const test = {
+			template: `<span>{{msg}}</span>`,
+			data() {
+				return { msg: 'ssssssss' };
+			}
+		};
 		const hello = Vue.extend({
-			template:`
-				<div>
-					<h2>{{msg}}</h2>
-					<test></test>	
-				</div>
-			`,
-			data(){
+			template: `<div><h2>{{msg}}</h2><test></test></div>`,
+			data() {
 				return {
-					msg:'你好啊！'
-				}
+					msg: '您好'
+				};
 			},
-			components:{test}
-		})
+			components: {
+				test
+			}
+		});
 
-
-		// console.log('@',school)
-		// console.log('#',hello)
-
+		console.log('@', school == hello);
 		//创建vm
 		const vm = new Vue({
-			el:'#root',
-			components:{school,hello}
-		})
+			el: '#root',
+			components: { school, hello }
+		});
 	</script>
 </html>
