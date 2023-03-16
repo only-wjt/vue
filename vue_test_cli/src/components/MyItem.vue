@@ -1,10 +1,18 @@
 <template>
   <li>
     <label>
-      <input type="checkbox" :checked="todo.done" />
+      <input
+        type="checkbox"
+        :checked="todo.done"
+        @change="hanldeCheck(todo.id)"
+      />
+      <!-- 虽然能够实现，但是不太建议这样写，因为这样是对props属性里面的对象里面的值最修改，但是vue不允许修改props中数据 -->
+      <!-- <input type="checkbox" v-model="todo.done" />  -->
       <span>{{ todo.title }}</span>
     </label>
-    <button class="btn btn-danger" style="display: none">删除</button>
+    <button class="btn btn-danger" @click="deleteTodoByid(todo.id)">
+      删除
+    </button>
   </li>
 </template>
 
@@ -12,7 +20,18 @@
 export default {
   name: 'MyItem',
   //生命接受todo对象
-  props: ['todo']
+  props: ['todo', 'checkTodo', 'deleteTodo'],
+  methods: {
+    hanldeCheck (id) {
+      // 通知App组件将对应的todo对象的done值取反
+      this.checkTodo(id);
+    },
+    deleteTodoByid (id) {
+      if (confirm("确定删除吗？")) {
+        this.deleteTodo(id);
+      }
+    }
+  }
 }
 </script>
 
@@ -50,5 +69,11 @@ li:before {
 
 li:last-child {
   border-bottom: none;
+}
+li:hover {
+  background-color: grey;
+}
+li:hover button {
+  display: block;
 }
 </style>

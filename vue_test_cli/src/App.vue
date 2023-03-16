@@ -3,7 +3,11 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <MyHeader :addTodo="addTodo"></MyHeader>
-        <MyList :todos="todos"></MyList>
+        <MyList
+          :todos="todos"
+          :checkTodo="checkTodo"
+          :deleteTodo="deleteTodo"
+        ></MyList>
         <MyFooter></MyFooter>
       </div>
     </div>
@@ -32,6 +36,17 @@ export default {
     addTodo (todoObj) {
       // console.log('@', "我是app抓紧", todoObj);
       this.todos.unshift(todoObj);
+    },
+    checkTodo (id) {
+      this.todos.forEach((todo) => {
+        if (todo.id === id) todo.done = !todo.done;
+      })
+    },
+    deleteTodo (id) {
+      // this.todos = this.todos.filter(todo => todo.id !== id)
+      this.todos = this.todos.filter((todo) => {
+        return todo.id !== id
+      })
     }
   }
 }
