@@ -10,10 +10,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   render: h => h(App),
-  mounted () {
-    // setTimeout(() => {
-    //   console.log('@', '销毁了');//此时子组件的实例都会小胡了
-    //   this.$destroy()
-    // }, 3000);
+  beforeCreate () {
+    Vue.prototype.$bus = this;
   }
 })
