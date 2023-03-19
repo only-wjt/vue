@@ -12,4 +12,4 @@ new Vue({
 	beforeCreate () {
 		Vue.prototype.$bus = this
 	},
-})·	
+})
