@@ -27,6 +27,7 @@ const actions = {
 		}, 500);
 	}
 }
+
 //准备mutations——用于操作数据（state）
 const mutations = {
 	JIA (state, value) {
@@ -39,7 +40,15 @@ const mutations = {
 }
 //准备state——用于存储数据
 const state = {
-	sum: 0
+	sum: 0,
+	school: '天津城建大学',
+	subject: "工商管理"
+}
+//准备一个getters，用于将state中的数据进行加工
+const getters = {
+	bigSum (state) {
+		return state.sum * 10;
+	}
 }
 
 //创建并暴露store
@@ -47,4 +56,5 @@ export default new Vuex.Store({
 	actions,
 	mutations,
 	state,
+	getters
 })
