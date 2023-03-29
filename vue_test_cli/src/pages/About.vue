@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: 'About'
+  name: 'About',
+  beforeDestroy () {
+    console.log('@', "about组件即将被销毁");
+  },
 }
 </script>
 

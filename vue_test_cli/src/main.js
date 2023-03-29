@@ -14,8 +14,8 @@ Vue.use(VueRouter);
 const vm = new Vue({
 	el: '#app',
 	render: h => h(App),
-	router: 'hello',
+	router: router,
 	mounted () {
-		console.log('@'); s
+		console.log('@');
 	},
 })
