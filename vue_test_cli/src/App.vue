@@ -1,19 +1,33 @@
 <template>
   <div>
-    <Count />
-    <hr />
-    <Person></Person>
+    <div class="row">
+      <div class="col-xs-offset-2 col-xs-8">
+        <div class="page-header"><h2>Vue Router Demo</h2></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!-- <a class="list-group-item active" href="./about.html">About</a>
+          <a class="list-group-item" href="./home.html">Home</a> -->
+          <router-link class="list-group-item active">About</router-link>
+          <router-link class="list-group-item active">Home</router-link>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-body">此处展示什么，得看用户的点击情况</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Count from './components/Count'
-import Person from './components/Person.vue'
+import Home from './components/Home.vue';
+import About from './components/About.vue';
 export default {
   name: 'App',
-  components: { Count, Person },
-  mounted () {
-    // console.log('App',this)
-  },
+  components: ['Home', 'About']
 }
 </script>
