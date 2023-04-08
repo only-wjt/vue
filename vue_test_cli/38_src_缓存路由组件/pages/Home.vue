@@ -11,7 +11,6 @@
         </li>
       </ul>
       <ul>
-        <!-- 如果不写include，则下面全部的组件都会被缓存,写了之后就可以缓存指定组件 -->
         <keep-alive :include="['News','Message']">
           <router-view></router-view>
         </keep-alive>

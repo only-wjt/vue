@@ -27,20 +27,6 @@ const router = new VueRouter({
           path: 'news',
           component: News,
           meta: { isAuth: true, title: 'news' },
-          // beforeEnter: (to, from, next) => {
-          //   console.log('@独享路由守卫');
-          //   console.log('@to', to);
-          //   console.log('@from', from);
-          //   if (to.meta.isAuth) {//判断是否需要鉴权
-          //     if (localStorage.getItem('school') === 'atguigu') {
-          //       next();
-          //     } else {
-          //       alert("学校名不对，请修改学校名")
-          //     }
-          //   } else {
-          //     next();
-          //   }
-          // }
         },
         {
           name: 'xiaoxi',
@@ -81,26 +67,25 @@ const router = new VueRouter({
 })
 //暴露之前增加路由守卫
 //全局前置路由守卫，每次路由切换之前会被调用，以及初始化的时候会被调用
-// router.beforeEach((to, from, next) => {
-// console.log('@前置路由守卫');
-// console.log('@to', to);
-// console.log('@from', from);
-// if (to.meta.isAuth) {//判断是否需要鉴权
-//   if (localStorage.getItem('school') === 'atguigu') {
-//     next();
-//   } else {
-//     alert("学校名不对，请修改学校名")
-//   }
-// } else {
-//   next();
-// }
-// })
-// router.afterEach((to, from) => {
-//   debugger;
-//   document.title = to.meta.title || '尚硅谷';
-//   console.log('@后置路由守卫');
-//   console.log('@to', to);
-//   console.log('@from', from);
-// })
-
+router.beforeEach((to, from, next) => {
+  console.log('@前置路由守卫');
+  console.log('@to', to);
+  console.log('@from', from);
+  if (to.meta.isAuth) {//判断是否需要鉴权
+    if (localStorage.getItem('school') === 'atguigu') {
+      next();
+    } else {
+      alert("学校名不对，请修改学校名")
+    }
+  } else {
+    next();
+  }
+})
+router.afterEach((to, from) => {
+  debugger;
+  document.title = to.meta.title || '尚硅谷';
+  console.log('@后置路由守卫');
+  console.log('@to', to);
+  console.log('@from', from);
+})
 export default router

@@ -27,20 +27,20 @@ const router = new VueRouter({
           path: 'news',
           component: News,
           meta: { isAuth: true, title: 'news' },
-          // beforeEnter: (to, from, next) => {
-          //   console.log('@独享路由守卫');
-          //   console.log('@to', to);
-          //   console.log('@from', from);
-          //   if (to.meta.isAuth) {//判断是否需要鉴权
-          //     if (localStorage.getItem('school') === 'atguigu') {
-          //       next();
-          //     } else {
-          //       alert("学校名不对，请修改学校名")
-          //     }
-          //   } else {
-          //     next();
-          //   }
-          // }
+          beforeEnter: (to, from, next) => {
+            console.log('@独享路由守卫');
+            console.log('@to', to);
+            console.log('@from', from);
+            if (to.meta.isAuth) {//判断是否需要鉴权
+              if (localStorage.getItem('school') === 'atguigu') {
+                next();
+              } else {
+                alert("学校名不对，请修改学校名")
+              }
+            } else {
+              next();
+            }
+          }
         },
         {
           name: 'xiaoxi',
